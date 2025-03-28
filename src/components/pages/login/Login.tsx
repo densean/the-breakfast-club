@@ -7,6 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import "./Login.less";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +16,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [isIncorrect, setIsIncorrect] = useState(false);
   const isErrorCredentials = isLogin && isIncorrect;
+  const { login } = useAuthContext();
 
   const form = useForm({
     defaultValues: isLogin
@@ -42,6 +44,7 @@ export default function Login() {
       (val.value.password = "neverShare1")
     ) {
       setIsIncorrect(false);
+      login();
       navigate({ to: "/" });
     }
     setIsIncorrect(true);
@@ -229,7 +232,7 @@ export default function Login() {
               radius="large"
               type="submit"
               color="blue"
-              disabled={!form.state.isValid}
+              // disabled={!form.state.isValid}
               className="web-button"
             />
           </form>

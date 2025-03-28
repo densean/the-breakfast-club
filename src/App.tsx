@@ -6,6 +6,7 @@ import { BookingProvider } from "./contexts/BookingContext";
 import { useFetchMovies } from "./hooks/useFetchMovies";
 import WebLoader from "./components/common/loader/Loader";
 import ErrorPage from "./components/pages/error-page/ErrorPage";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createRouter({
   routeTree,
@@ -21,9 +22,11 @@ function App() {
   return (
     <>
       <Theme>
-        <BookingProvider initialMovies={movies}>
-          <RouterProvider router={router} />
-        </BookingProvider>
+        <AuthProvider>
+          <BookingProvider initialMovies={movies}>
+            <RouterProvider router={router} />
+          </BookingProvider>
+        </AuthProvider>
       </Theme>
     </>
   );

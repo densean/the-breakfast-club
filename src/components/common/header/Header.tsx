@@ -1,4 +1,10 @@
+import { useAuthContext } from "@/hooks/useAuthContext";
+import { useNavigate } from "@tanstack/react-router";
+
 export default function WebHeader() {
+  const { logout } = useAuthContext();
+  const navigate = useNavigate();
+
   return (
     <header className="absolute w-full z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
@@ -8,12 +14,18 @@ export default function WebHeader() {
           <a href="/dashboard" className=" hover:text-gray-300">
             Home
           </a>
-          <a href="/bookingList" className=" hover:text-gray-300">
+          <a href="/bookingList" className=" hover:text-gray-300 hover:no-">
             Booked Seats
           </a>
-          <a href="/logout" className=" hover:text-gray-300">
+          <p
+            className="hover:text-gray-300 cursor-pointer"
+            onClick={() => {
+              logout();
+              navigate({ to: "/logout" });
+            }}
+          >
             Log out
-          </a>
+          </p>
         </nav>
 
         <button className="md:hidden text-white focus:outline-none">

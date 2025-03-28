@@ -70,7 +70,7 @@ a {
 }
 a:hover {
   color: hsl(var(--primary-foreground));
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 /* Buttons */
