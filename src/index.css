@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@radix-ui/themes/styles.css";
+
+/* Font Setup (Phudu for Headings, Onest for Body) */
+@import url("https://fonts.googleapis.com/css2?family=Questrial&family=Raleway:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&family=Telex&display=swap");
+
+:root {
+  --font-heading: "Questrial", sans-serif;
+  --font-body: "Onest", sans-serif;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-body);
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 500;
+}
+h5 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+}
+h6 {
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+}
+
+/* Paragraph */
+p {
+  font-family: var(--font-body);
+  font-size: 1rem; /* 16px */
+  color: hsl(var(--muted-foreground));
+}
+
+/* Links */
+a {
+  font-family: var(--font-body);
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+a:hover {
+  color: hsl(var(--primary-foreground));
+  text-decoration: underline;
+}
+
+/* Buttons */
+button {
+  font-family: var(--font-body);
+  transition: all 0.2s ease-in-out;
+}
+/* button:hover {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+} */
