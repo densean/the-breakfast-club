@@ -1,6 +1,6 @@
 import { useState } from "react";
 import WebLoader from "@/components/common/loader/Loader";
-import { useBookingContext } from "@/hooks/useBookingContext";
+import { useBookingContext } from "@/core/hooks/useBookingContext";
 import TicketCard from "./child/TicketCard";
 import BookingBanner from "./child/BookingBanner";
 import EmptyBooking from "./child/EmptyBooking";

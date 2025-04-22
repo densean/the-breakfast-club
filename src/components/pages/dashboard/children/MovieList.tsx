@@ -1,4 +1,4 @@
-import { useBookingContext } from "@/hooks/useBookingContext";
+import { useBookingContext } from "@/core/hooks/useBookingContext";
 import MovieCard from "./MovieCard";
 
 export interface Movies {

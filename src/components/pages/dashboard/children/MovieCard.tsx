@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import "./MovieCard.less";
 import { Movies } from "@/components/pages/dashboard/children/MovieList";
-import { useBookingContext } from "@/hooks/useBookingContext";
+import { useBookingContext } from "@/core/hooks/useBookingContext";
 import { WebButton } from "@/components/common/button/Button";
 import { useNavigate } from "@tanstack/react-router";
 import WebLoader from "@/components/common/loader/Loader";

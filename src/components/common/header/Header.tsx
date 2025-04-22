@@ -1,4 +1,4 @@
-import { useAuthContext } from "@/hooks/useAuthContext";
+import { useAuthContext } from "@/core/hooks/useAuthContext";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function WebHeader() {

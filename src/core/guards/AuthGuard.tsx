@@ -1,4 +1,4 @@
-import { useAuthContext } from "@/hooks/useAuthContext";
+import { useAuthContext } from "@/core/hooks/useAuthContext";
 import { Navigate, useMatch, useMatchRoute } from "@tanstack/react-router";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {

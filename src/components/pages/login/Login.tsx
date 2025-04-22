@@ -7,7 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import "./Login.less";
-import { useAuthContext } from "@/hooks/useAuthContext";
+import { useAuthContext } from "@/core/hooks/useAuthContext";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
