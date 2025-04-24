@@ -2,11 +2,10 @@ import "./App.css";
 import { Theme } from "@radix-ui/themes";
 import { routeTree } from "./routeTree.gen";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
-import { BookingProvider } from "./core/contexts/BookingContext";
-import { useFetchMovies } from "./core/hooks/useFetchMovies";
-import WebLoader from "./components/common/loader/Loader";
-import ErrorPage from "./components/pages/error-page/ErrorPage";
 import { AuthProvider } from "./core/contexts/AuthContext";
+import { Provider } from "react-redux";
+import store from "./core/redux/store";
+import ErrorPage from "./components/pages/error-page/ErrorPage";
 
 const router = createRouter({
   routeTree,
@@ -14,19 +13,14 @@ const router = createRouter({
 });
 
 function App() {
-  const { movies, loading, error } = useFetchMovies();
-
-  if (loading) return <WebLoader></WebLoader>;
-  if (error) return <p>{error}</p>;
-
   return (
     <>
       <Theme>
-        <AuthProvider>
-          <BookingProvider initialMovies={movies}>
+        <Provider store={store}>
+          <AuthProvider>
             <RouterProvider router={router} />
-          </BookingProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </Provider>
       </Theme>
     </>
   );

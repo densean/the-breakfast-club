@@ -4,7 +4,7 @@ import { COLORS } from "../common.model";
 
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
-  placholder?: string;
+  placeholder?: string;
   label?: string;
   size: "1" | "2" | "3";
   radius?: "none" | "small" | "medium" | "large" | "full";
@@ -49,7 +49,7 @@ export const WebInput = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     return (
-      <div className="">
+      <div className={className}>
         <span className="font-medium text-">{label}</span>
         <div className=" input-text">
           <TextField.Root
@@ -58,7 +58,7 @@ export const WebInput = React.forwardRef<HTMLInputElement, InputProps>(
             variant={variant}
             radius={radius}
             color={color}
-            className={`w-full ${errorMessage ? "border border-red-500" : ""} ${className}`}
+            className={`w-full ${errorMessage ? "border border-red-500" : ""}`}
             ref={ref}
             placeholder={placeholder}
             onChange={onChange}

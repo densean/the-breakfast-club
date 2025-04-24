@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/dialog";
 import "./MovieCard.less";
 import { Movies } from "@/components/pages/dashboard/children/MovieList";
-import { useBookingContext } from "@/core/hooks/useBookingContext";
+// import { useBookingContext } from "@/core/hooks/useBookingContext";
 import { WebButton } from "@/components/common/button/Button";
 import { useNavigate } from "@tanstack/react-router";
 import WebLoader from "@/components/common/loader/Loader";
 
 export default function MovieCard({ movie }: { movie: Movies }) {
-  const { bookSeat } = useBookingContext();
+  // const { bookSeat } = useBookingContext();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

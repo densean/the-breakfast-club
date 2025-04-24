@@ -1,4 +1,5 @@
 import { useAuthContext } from "@/core/hooks/useAuthContext";
+import { PermissionGate } from "@/core/rbac/PermissionGate";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function WebHeader() {
@@ -17,6 +18,11 @@ export default function WebHeader() {
           <a href="/bookingList" className=" hover:text-gray-300 hover:no-">
             Booked Seats
           </a>
+          <PermissionGate action="view" component="adminDashboard">
+            <a href="/admin" className=" hover:text-gray-300 hover:no-">
+              Admin
+            </a>
+          </PermissionGate>
           <p
             className="hover:text-gray-300 cursor-pointer"
             onClick={() => {

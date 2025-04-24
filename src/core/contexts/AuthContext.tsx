@@ -1,30 +1,38 @@
 import { createContext, useState, ReactNode } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../redux/store";
+import { User } from "../auth.model";
+import { setUser, logout as reduxLogout } from "../redux/authSlice";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  user: User;
+  login: (user: User) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const dispatch: AppDispatch = useDispatch();
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("authToken")
+    !!sessionStorage.getItem("authToken")
   );
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const login = () => {
-    localStorage.setItem("authToken", crypto.randomUUID());
+  const login = (user: User) => {
+    sessionStorage.setItem("authToken", JSON.stringify(user));
+    dispatch(setUser(user));
     setIsAuthenticated(true);
   };
 
   const logout = () => {
-    localStorage.removeItem("authToken");
+    dispatch(reduxLogout());
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

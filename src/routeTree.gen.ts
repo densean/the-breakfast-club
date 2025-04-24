@@ -11,14 +11,23 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UnauthorizedImport } from './routes/unauthorized'
 import { Route as LogoutImport } from './routes/logout'
 import { Route as LoginImport } from './routes/login'
 import { Route as ErrorImport } from './routes/error'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as BookingListImport } from './routes/bookingList'
 import { Route as IndexImport } from './routes/index'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AdminMoviesImport } from './routes/admin/movies'
 
 // Create/Update Routes
+
+const UnauthorizedRoute = UnauthorizedImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LogoutRoute = LogoutImport.update({
   id: '/logout',
@@ -53,6 +62,18 @@ const BookingListRoute = BookingListImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminIndexRoute = AdminIndexImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminMoviesRoute = AdminMoviesImport.update({
+  id: '/admin/movies',
+  path: '/admin/movies',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,6 +123,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LogoutImport
       parentRoute: typeof rootRoute
     }
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/movies': {
+      id: '/admin/movies'
+      path: '/admin/movies'
+      fullPath: '/admin/movies'
+      preLoaderRoute: typeof AdminMoviesImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -114,6 +156,9 @@ export interface FileRoutesByFullPath {
   '/error': typeof ErrorRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
+  '/unauthorized': typeof UnauthorizedRoute
+  '/admin/movies': typeof AdminMoviesRoute
+  '/admin': typeof AdminIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -123,6 +168,9 @@ export interface FileRoutesByTo {
   '/error': typeof ErrorRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
+  '/unauthorized': typeof UnauthorizedRoute
+  '/admin/movies': typeof AdminMoviesRoute
+  '/admin': typeof AdminIndexRoute
 }
 
 export interface FileRoutesById {
@@ -133,6 +181,9 @@ export interface FileRoutesById {
   '/error': typeof ErrorRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
+  '/unauthorized': typeof UnauthorizedRoute
+  '/admin/movies': typeof AdminMoviesRoute
+  '/admin/': typeof AdminIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -144,8 +195,20 @@ export interface FileRouteTypes {
     | '/error'
     | '/login'
     | '/logout'
+    | '/unauthorized'
+    | '/admin/movies'
+    | '/admin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bookingList' | '/dashboard' | '/error' | '/login' | '/logout'
+  to:
+    | '/'
+    | '/bookingList'
+    | '/dashboard'
+    | '/error'
+    | '/login'
+    | '/logout'
+    | '/unauthorized'
+    | '/admin/movies'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -154,6 +217,9 @@ export interface FileRouteTypes {
     | '/error'
     | '/login'
     | '/logout'
+    | '/unauthorized'
+    | '/admin/movies'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 
@@ -164,6 +230,9 @@ export interface RootRouteChildren {
   ErrorRoute: typeof ErrorRoute
   LoginRoute: typeof LoginRoute
   LogoutRoute: typeof LogoutRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
+  AdminMoviesRoute: typeof AdminMoviesRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -173,6 +242,9 @@ const rootRouteChildren: RootRouteChildren = {
   ErrorRoute: ErrorRoute,
   LoginRoute: LoginRoute,
   LogoutRoute: LogoutRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
+  AdminMoviesRoute: AdminMoviesRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -190,7 +262,10 @@ export const routeTree = rootRoute
         "/dashboard",
         "/error",
         "/login",
-        "/logout"
+        "/logout",
+        "/unauthorized",
+        "/admin/movies",
+        "/admin/"
       ]
     },
     "/": {
@@ -210,6 +285,15 @@ export const routeTree = rootRoute
     },
     "/logout": {
       "filePath": "logout.tsx"
+    },
+    "/unauthorized": {
+      "filePath": "unauthorized.tsx"
+    },
+    "/admin/movies": {
+      "filePath": "admin/movies.tsx"
+    },
+    "/admin/": {
+      "filePath": "admin/index.tsx"
     }
   }
 }

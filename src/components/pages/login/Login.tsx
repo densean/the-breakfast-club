@@ -8,10 +8,13 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import "./Login.less";
 import { useAuthContext } from "@/core/hooks/useAuthContext";
+import {
+  mockLoginCredentials,
+  mockUserDetails,
+} from "@/core/data/users/users.mock";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  //forgot to implement
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
   const [isIncorrect, setIsIncorrect] = useState(false);
@@ -33,26 +36,39 @@ export default function Login() {
       if (isLogin) {
         onLogin(values);
       } else {
-        onRegister(values);
+        alert("Register not implemented");
+        // onRegister(values);
       }
     },
   });
 
   const onLogin = (val: { value: { username: string; password: string } }) => {
-    if (
-      val.value.username === "sean123" &&
-      (val.value.password = "neverShare1")
-    ) {
+    const { username, password } = val.value;
+    const validCred = mockLoginCredentials.find(
+      (cred) => cred.username === username && cred.password === password
+    );
+
+    if (!validCred) {
+      setIsIncorrect(true);
+      return;
+    }
+
+    const userDetails = mockUserDetails.find(
+      (user) => user.username === validCred.username
+    );
+
+    if (userDetails) {
       setIsIncorrect(false);
-      login();
+      login(userDetails);
       navigate({ to: "/" });
     }
+
     setIsIncorrect(true);
   };
 
-  const onRegister = (val) => {
-    console.log(val, "not implemented");
-  };
+  // const onRegister = (val) => {
+  //   console.log(val, "not implemented");
+  // };
 
   return (
     <div className="flex h-screen">
@@ -81,7 +97,14 @@ export default function Login() {
             <Alert variant="destructive" className="mb-10">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Wrong Credentials</AlertTitle>
-              <AlertDescription>sean123, neverShare1</AlertDescription>
+              <AlertDescription>
+                {mockLoginCredentials.map((cred, idx) => (
+                  <div key={idx}>
+                    <strong>Username:</strong> {cred.username} —{" "}
+                    <strong>Password:</strong> {cred.password}
+                  </div>
+                ))}
+              </AlertDescription>
             </Alert>
           )}
 
@@ -90,7 +113,10 @@ export default function Login() {
               e.preventDefault();
               e.stopPropagation();
               setFormSubmitted(true);
-              form.handleSubmit();
+              setTimeout(() => {
+                form.handleSubmit();
+                setFormSubmitted(false);
+              }, 1000);
             }}
             className="space-y-4"
           >
@@ -232,7 +258,7 @@ export default function Login() {
               radius="large"
               type="submit"
               color="blue"
-              // disabled={!form.state.isValid}
+              disabled={formSubmitted}
               className="web-button"
             />
           </form>
